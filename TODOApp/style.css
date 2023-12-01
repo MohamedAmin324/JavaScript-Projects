@@ -1,0 +1,39 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body, h1, p, ul {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 20px;
+    padding-inline: 0;
+    border: 1px dashed black;
+    margin: 20px 0;
+}
+
+body {
+    margin-top: 100px;
+    display: grid;
+    place-content: center;
+}
+
+button, input:not(label > input) {
+    display: block;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+.add-task {
+    margin-top: 30px;
+}
+
+input[type="text"] {
+    padding: 5px;
+}
