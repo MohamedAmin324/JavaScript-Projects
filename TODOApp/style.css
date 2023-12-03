@@ -47,3 +47,18 @@ input[type="text"] {
     text-align: center;
     margin-top: 20px;
 }
+
+button {
+    padding: 6.5px 2px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    border: 2.5px solid black;
+    border-radius: 11px;
+}
+
+button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: bolder;
+    scale: 1.1;
+}
