@@ -42,3 +42,8 @@ input[type="text"] {
     display: none;
 }
 
+.disclaimer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+}

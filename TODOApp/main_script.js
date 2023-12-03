@@ -5,7 +5,7 @@ const submitBtn = document.querySelector(".submit");
 const resetBtn = document.querySelector(".reset");
 const taskList = document.querySelector(".task-list");
 const inputField = document.querySelector("input");
-const disclaimerMessage = document.querySelector(".disclaimer");
+const disclaimerMessage = document.querySelector("p:not(.warning)");
 /* The idea behind defining a variable with that holds all the added tasks is to be able to load them instantly from the LocalStorage when the pages reloads instead of listening fro the event*/
 let tasks = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -22,8 +22,8 @@ function removeListElements() {
 
 function resetData() {
     tasks = [];
-    removeListElements();
     disclaimerMessage.classList.remove("hide");
+    removeListElements();
     localStorage.clear();
 }
 
@@ -62,24 +62,6 @@ function setTaskStatus(e) {
        tasks[identifier].done = currentCheckbox.checked;
     }
 }
-
-// Watching Over the list inner changes to toggle the disclaimer
-
-/*const callback = function(changesRecords) {
-    console.log(changesRecords);
-    const currentRecord = changesRecords[0];
-    console.log(taskList.childElementCount);
-    disclaimerMessage.classList.toggle("hide", taskList.childElementCount === 1);
-    //taskList.childElementCount === 1 ? disclaimerMessage.classList.remove("hide"): disclaimerMessage.classList.add("hide");
-}
-const listObserver = new MutationObserver(callback);
-const configurationObj = {
-    childList: true,
-    subtree: true,
-}
-
-
-listObserver.observe(taskList, configurationObj);*/
 
 addTaskBtn.addEventListener("click", getTasks);
 submitBtn.addEventListener("click", saveData);
