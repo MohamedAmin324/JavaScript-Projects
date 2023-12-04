@@ -6,6 +6,8 @@ const resetBtn = document.querySelector(".reset");
 const taskList = document.querySelector(".task-list");
 const inputField = document.querySelector("input");
 const disclaimerMessage = document.querySelector("p:not(.warning)");
+
+
 /* The idea behind defining a variable with that holds all the added tasks is to be able to load them instantly from the LocalStorage when the pages reloads instead of listening fro the event*/
 let tasks = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -51,6 +53,11 @@ function populateList(userTask) {
     <input type="checkbox" id="${index}" ${userTask.done? "checked": "unchecked"}>
     ${userTask.text}
     </label>
+
+    <div class="options-container">
+    <a class="edit-option"><i class="fa-solid fa-pen" style="color: #08d93c;"></i></a>
+    <a class="delete-option"><i class="fa-solid fa-trash" style="color: #e12323;"></i></a>
+    </div>
     </li>
     `
 }

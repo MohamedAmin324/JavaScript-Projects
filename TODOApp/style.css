@@ -8,14 +8,24 @@ body, h1, p, ul {
 
 ul {
     list-style: none;
-    padding: 20px;
-    padding-inline: 0;
+    padding: 20px 10px;
     border: 1px dashed black;
     margin: 20px 0;
 }
 
+ul > li  {
+    font-size: 17.5px;
+    padding: 4px 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.options-container > a:hover {
+    cursor: pointer;
+}
+
 body {
-    margin-top: 100px;
+    margin-top: 55px;
     display: grid;
     place-content: center;
 }
