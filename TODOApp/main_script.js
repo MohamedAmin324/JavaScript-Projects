@@ -5,32 +5,11 @@ const submitBtn = document.querySelector(".submit");
 const resetBtn = document.querySelector(".reset");
 const taskList = document.querySelector(".task-list");
 const inputField = document.querySelector("input");
-const disclaimerMessage = document.querySelector("p:not(.warning)");
+const disclaimerMessage = document.querySelector(".disclaimer");
 
-/* The idea behind defining a variable with that holds all the added tasks is to be able to load them instantly from the LocalStorage when the pages reloads instead of listening fro the event*/
 let tasks = JSON.parse(localStorage.getItem("data")) || [];
 
-
-function saveData() {
-    // when using the localStorage object , transform your data into JSON to easily save it
-    localStorage.setItem("data", JSON.stringify(tasks));
-}
-
-function removeListElements() {
-    const listElements = taskList.querySelectorAll("li");
-    listElements.forEach((currentItem)=> taskList.removeChild(currentItem));
-}
-
-function resetData() {
-    tasks = [];
-    disclaimerMessage.classList.remove("hide");
-    removeListElements();
-    localStorage.clear();
-}
-
 function getTasks(e) {
-    // the e represents the event object
-    // if the input element is empty the function will stop
     const userInput = inputField.value;
     if(!userInput) return;
     const currentTask = {
@@ -61,12 +40,30 @@ function populateList(userTask) {
     `
 }
 
+function saveData() {
+    localStorage.setItem("data", JSON.stringify(tasks));
+}
+
+function removeListElements() {
+    taskList.innerHTML = "";
+}
+
+function resetData() {
+    tasks = [];
+    revealDisclaimer();
+    removeListElements();
+    localStorage.clear();
+}
+
+function revealDisclaimer() {
+    disclaimerMessage.classList.remove("hide");
+}
+
 function setTaskStatus(e) {
     const currentCheckbox = e.target;
-    if(currentCheckbox.matches("input")){
-       const identifier = currentCheckbox.id;
-       tasks[identifier].done = currentCheckbox.checked;
-    }
+    if(!currentCheckbox.matches("input")) return;
+    const identifier = currentCheckbox.id;
+    tasks[identifier].done = currentCheckbox.checked;
 }
 
 function deleteTask(e) {
@@ -80,23 +77,26 @@ function deleteTask(e) {
     rerenderList();
 }
 
-function rerenderList() {
-    if (!tasks.length) disclaimerMessage.classList.remove("hide");
-    taskList.innerHTML = "";
-    tasks.forEach((currentTask)=>{
-        populateList(currentTask);
-    })
+function displayList() {
+    tasks.forEach(currentTask=>populateList(currentTask));
 }
 
+function rerenderList() {
+    if (!tasks.length) revealDisclaimer();
+    removeListElements();
+    displayList();
+}
+
+
+// Basic Options
 addTaskBtn.addEventListener("click", getTasks);
 submitBtn.addEventListener("click", saveData);
 resetBtn.addEventListener("click", resetData);
+
+// Events related to list
 taskList.addEventListener("click", setTaskStatus);
 taskList.addEventListener("click", deleteTask);
+
 window.addEventListener("load", ()=> {
-    if(tasks.length) {
-        tasks.forEach((currentTask)=>{
-            populateList(currentTask);
-        })
-    }
+    if(tasks.length) displayList();
 })
