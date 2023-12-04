@@ -7,7 +7,6 @@ const taskList = document.querySelector(".task-list");
 const inputField = document.querySelector("input");
 const disclaimerMessage = document.querySelector("p:not(.warning)");
 
-
 /* The idea behind defining a variable with that holds all the added tasks is to be able to load them instantly from the LocalStorage when the pages reloads instead of listening fro the event*/
 let tasks = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -70,10 +69,30 @@ function setTaskStatus(e) {
     }
 }
 
+function deleteTask(e) {
+    const clickedOption = e.target;
+    if(!clickedOption.matches(".fa-trash")) return;
+    const isDeletionConfirmed = confirm("Do you really wish to delete the following task (This action is permanent once you submit the list)");
+    if(!isDeletionConfirmed) return;
+    const deletedTask = clickedOption.closest("li");
+    const deletedTaskIndex = Number(deletedTask.querySelector("input").id);
+    tasks.splice(deletedTaskIndex, 1);
+    rerenderList();
+}
+
+function rerenderList() {
+    if (!tasks.length) disclaimerMessage.classList.remove("hide");
+    taskList.innerHTML = "";
+    tasks.forEach((currentTask)=>{
+        populateList(currentTask);
+    })
+}
+
 addTaskBtn.addEventListener("click", getTasks);
 submitBtn.addEventListener("click", saveData);
 resetBtn.addEventListener("click", resetData);
 taskList.addEventListener("click", setTaskStatus);
+taskList.addEventListener("click", deleteTask);
 window.addEventListener("load", ()=> {
     if(tasks.length) {
         tasks.forEach((currentTask)=>{
