@@ -1,33 +1,76 @@
+/* ------------------CSS Resets and Custom Variables--------------------- */
+
+:root {
+    --color-one: rgb(114, 110, 110);
+}
+
 *, ::after, ::before {
     box-sizing: border-box;
 }
 
-body, h1, p, ul {
+body, h1, p, ul, h3 {
     margin: 0;
 }
 
-ul {
+body {
+    margin-top: 35px;
+    display: grid;
+    place-content: center;
+}
+
+/* -------------------Utility Classes----------------- */
+
+/* Layout and display */
+
+.text_center {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.margin_auto {
+    margin: auto;
+}
+
+/* hover animation */
+.hover_cursor_pointer:hover {
+    cursor: pointer;
+}
+
+/* ---------------------Task Manager styles------------------- */
+
+.task-manager {
+    max-width: 275px;
+}
+
+.task-manager__title {
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+.disclaimer {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 5px;
+}
+
+.task-list {
     list-style: none;
     padding: 20px 10px;
     border: 1px dashed black;
     margin: 20px 0;
 }
 
-ul > li  {
+.task-list > .task  {
     font-size: 17.5px;
     padding: 4px 6px;
     display: flex;
     justify-content: space-between;
-}
-
-.options-container > a:hover {
-    cursor: pointer;
-}
-
-body {
-    margin-top: 55px;
-    display: grid;
-    place-content: center;
 }
 
 button, input:not(label > input) {
@@ -35,27 +78,8 @@ button, input:not(label > input) {
     width: 100%;
 }
 
-h1 {
-    font-size: 3rem;
-    text-decoration: underline;
-}
-
 .add-task {
     margin-top: 30px;
-}
-
-input[type="text"] {
-    padding: 5px;
-}
-
-.hide {
-    display: none;
-}
-
-.disclaimer {
-    font-size: 13px;
-    text-align: center;
-    margin-top: 20px;
 }
 
 button {
@@ -67,8 +91,24 @@ button {
 }
 
 button:hover {
-    cursor: pointer;
     text-decoration: underline;
     font-size: bolder;
     scale: 1.1;
+}
+
+/* -----------------------Info Panel styles-------------------------- */
+
+.info-panel {
+    max-width: 500px;
+}
+
+.info-panel__title {
+    margin: 15px 0 20px 0;
+    font-weight: bold;
+}
+
+.list {
+    padding: 35px;
+    list-style-type: decimal;
+    border: solid var(--color-one)  5px;
 }

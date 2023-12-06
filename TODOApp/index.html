@@ -10,28 +10,28 @@
 </head>
 <body>
 
-    <div class="task-manager">
+    <div class="task-manager margin_auto">
 
-    <h1>To Do App</h1>
-    <p class="disclaimer">Your To Do List is currently empty!</p>
+    <h1 class="task-manager__title">To Do App</h1>
+    <p class="disclaimer text_center">Your To Do List is currently empty!</p>
     <ul class="task-list"></ul>
-    <input type="text" placeholder="Add New Task">
-    <button class="add-task">Add New Task</button>
     <p class="warning"></p>
-    <button class="submit">Submit To Do List</button>
-    <button class="reset">Reset To Do List</button>
+    <input type="text" placeholder="Add New Task">
+    <button class="add-task hover_cursor_pointer">Add New Task</button>
+    <button class="submit hover_cursor_pointer">Submit To Do List</button>
+    <button class="reset hover_cursor_pointer">Reset To Do List</button>
+    </div>
 
-    <div class="info-panel">
+    <div class="info-panel margin_auto">
+        <h3 class="info-panel__title text_center">-- About The App --</h3>
         <ul class="list">
             <li class="list__info">
                 <p class="list__text">
-                    Any deleted or edited task can be restored as long as you did not submit the List,<br>
-                    Simply refresh the page
+                    Any deleted or edited task can be restored as long as you did not submit the List,
+                    Simply refresh the page.
                 </p>
             </li>
         </ul>
-    </div>
-
     </div>
 </body>
 </html>

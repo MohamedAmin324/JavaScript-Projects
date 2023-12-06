@@ -26,15 +26,15 @@ function populateList(userTask) {
     const index = tasks.indexOf(userTask);
 
     taskList.innerHTML = taskList.innerHTML + `
-    <li>
+    <li class="task">
     <label for="${index}">
     <input type="checkbox" id="${index}" ${userTask.done? "checked": "unchecked"}>
     ${userTask.text}
     </label>
 
     <div class="options-container">
-    <a class="edit-option"><i class="fa-solid fa-pen" style="color: #08d93c;"></i></a>
-    <a class="delete-option"><i class="fa-solid fa-trash" style="color: #e12323;"></i></a>
+    <a class="edit-option hover_cursor_pointer"><i class="fa-solid fa-pen" style="color: #08d93c;"></i></a>
+    <a class="delete-option hover_cursor_pointer"><i class="fa-solid fa-trash" style="color: #e12323;"></i></a>
     </div>
     </li>
     `
