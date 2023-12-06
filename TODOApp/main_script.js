@@ -35,6 +35,7 @@ function populateList(userTask) {
     <div class="options-container">
     <a class="edit-option hover_cursor_pointer"><i class="fa-solid fa-pen" style="color: #08d93c;"></i></a>
     <a class="delete-option hover_cursor_pointer"><i class="fa-solid fa-trash" style="color: #e12323;"></i></a>
+    <a class="cancel-edit-option hide hover_cursor_pointer"><i class="fa-solid fa-xmark"></i></a>
     </div>
     </li>
     `
@@ -66,6 +67,39 @@ function setTaskStatus(e) {
     tasks[identifier].done = currentCheckbox.checked;
 }
 
+function editTask(e) {
+    if(!e.target.matches(".fa-pen")) return;
+    const currentTask = e.target.closest('li');
+    toggleOptions(currentTask);
+    toggleBasicFunctionality(true,currentTask);
+    currentTask.querySelector(".fa-xmark").addEventListener("click", cancelEdit);
+}
+
+function toggleOptions(parentTask) {
+    parentTask.querySelectorAll("a:not(.cancel-edit-option)").forEach((link)=> link.classList.toggle("hide"));
+    parentTask.querySelector(".cancel-edit-option").classList.toggle("hide");
+}
+
+/* a little bit of extra code that could be avoided if i used buttons instead of links (which I should have done) */
+
+function toggleBasicFunctionality(indicator, parentTask) {
+    const optionsBtn = document.querySelectorAll("button");
+    const tasks = taskList.querySelectorAll("li");
+    optionsBtn.forEach(btn => indicator? btn.setAttribute("disabled", indicator) : btn.removeAttribute("disabled"));
+    tasks.forEach((task)=>{
+        if(task === parentTask) return;
+        const options = task.querySelectorAll("a:not(.cancel-edit-option)");
+        options.forEach(link => link.classList.toggle("hide"));
+    })
+}
+
+function cancelEdit(e) {
+    const currentTask = e.target.closest('li');
+    toggleOptions(currentTask);
+    toggleBasicFunctionality(false,currentTask);
+    e.target.removeEventListener("click", cancelEdit);
+}
+
 function deleteTask(e) {
     const clickedOption = e.target;
     if(!clickedOption.matches(".fa-trash")) return;
@@ -95,6 +129,7 @@ resetBtn.addEventListener("click", resetData);
 
 // Events related to list
 taskList.addEventListener("click", setTaskStatus);
+taskList.addEventListener("click", editTask);
 taskList.addEventListener("click", deleteTask);
 
 window.addEventListener("load", ()=> {

@@ -112,3 +112,7 @@ button:hover {
     list-style-type: decimal;
     border: solid var(--color-one)  5px;
 }
+
+.list__info:not(.list > .list__info:last-child) {
+    margin-bottom: 15px;
+}
