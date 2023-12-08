@@ -66,6 +66,12 @@ input[type="text"] {
     margin: 20px 0;
 }
 
+.warning {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
 .task-list > .task  {
     font-size: 17.5px;
     padding: 4px 6px;

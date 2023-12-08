@@ -6,6 +6,8 @@ const resetBtn = document.querySelector(".reset");
 const taskList = document.querySelector(".task-list");
 const inputField = document.querySelector("input");
 const disclaimerMessage = document.querySelector(".disclaimer");
+const warningMessage = document.querySelector(".warning");
+let timer;
 
 // First time i use the AbortController constructor, an new way to cancel event listeners
 const InputEventController = new AbortController();
@@ -15,7 +17,10 @@ let tasks = JSON.parse(localStorage.getItem("data")) || [];
 
 function getTasks(e) {
     const userInput = inputField.value;
-    if (!userInput) return;
+    if (!userInput) {
+        sendMessage("please enter a task", "red");
+        return;
+    }
     const currentTask = {
         text: userInput,
         done: false,
@@ -45,6 +50,10 @@ function populateList(userTask) {
 }
 
 function saveData() {
+    if(!taskList.children.length) {
+        sendMessage("the task list is empty!!!!", "red");
+        return;
+    }
     localStorage.setItem("data", JSON.stringify(tasks));
 }
 
@@ -53,6 +62,11 @@ function removeListElements() {
 }
 
 function resetData() {
+    if(!taskList.children.length) {
+        sendMessage("the task list is empty!!!!", "red");
+        return;
+    }
+    
     tasks = [];
     revealDisclaimer();
     removeListElements();
@@ -141,6 +155,14 @@ function rerenderList() {
     if (!tasks.length) revealDisclaimer();
     removeListElements();
     displayList();
+}
+
+function sendMessage(messageText, color) {
+    clearTimeout(timer);
+    warningMessage.innerText = "";
+    warningMessage.innerText = messageText;
+    warningMessage.style.color = color;
+    timer = setTimeout(()=> warningMessage.innerText = "", 3500);
 }
 
 
