@@ -151,8 +151,6 @@ function cancelOrEndEdit(e) {
 function deleteTask(e) {
     const clickedOption = e.target;
     if (!clickedOption.matches(".fa-trash")) return;
-    /*const isDeletionConfirmed = confirm("Do you really wish to delete the following task (This action is permanent once you submit the list)");
-    if (!isDeletionConfirmed) return;*/
     const deletedTask = clickedOption.closest("li");
     const deletedTaskIndex = Number(deletedTask.querySelector("input").id);
     tasks.splice(deletedTaskIndex, 1);
@@ -187,6 +185,25 @@ function checkTaskExistence(taskTextValue) {
     return tasks.some((currentTask)=> currentTask.text === taskTextValue);
 }
 
+function displayCheckedStyles(e) {
+    const clickedCheckBox = e.target;
+    if (!clickedCheckBox.matches("input[type='checkbox']")) return;
+
+    const labelElement = clickedCheckBox.closest("label");
+
+    if(clickedCheckBox.checked) {
+        labelElement.style.color = "gray";
+        labelElement.style.textDecoration = "line-through";
+        clickedCheckBox.closest("li").querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.add("hide"));
+    }
+
+    if(!clickedCheckBox.checked) {
+        labelElement.style.color = "black";
+        labelElement.style["text-decoration"]= "none";
+        clickedCheckBox.closest("li").querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.remove("hide"));
+    }
+}
+
 
 // Basic Options
 addTaskBtn.addEventListener("click", getTasks);
@@ -197,6 +214,7 @@ resetBtn.addEventListener("click", resetData);
 taskList.addEventListener("click", setTaskStatus);
 taskList.addEventListener("click", editTask);
 taskList.addEventListener("click", deleteTask);
+taskList.addEventListener("click", displayCheckedStyles);
 
 window.addEventListener("load", () => {
     if (tasks.length) displayList();
