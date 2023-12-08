@@ -21,6 +21,13 @@ function getTasks(e) {
         sendMessage("please enter a task", "red");
         return;
     }
+
+    if(checkTaskExistence(userInput)) {
+        sendMessage("Task Already exists!", "red");
+        return;
+    }
+
+
     const currentTask = {
         text: userInput,
         done: false,
@@ -54,6 +61,8 @@ function saveData() {
         sendMessage("the task list is empty!!!!", "red");
         return;
     }
+
+    if(!seekConfirmation("Submit list, any edits or deletions will be saved! (This action cannot be undone)")) return;
     localStorage.setItem("data", JSON.stringify(tasks));
 }
 
@@ -66,7 +75,9 @@ function resetData() {
         sendMessage("the task list is empty!!!!", "red");
         return;
     }
-    
+
+    if(!seekConfirmation("Delete the entire list! (This action cannot be undone!)")) return;
+
     tasks = [];
     revealDisclaimer();
     removeListElements();
@@ -105,6 +116,7 @@ function editTask(e) {
         inputField.blur();
         toggleOptions(currentTask);
         toggleBasicFunctionality(false, currentTask);
+        sendMessage("Task successfully edited", "green");
         InputEventController.abort();
     }, {
         signal
@@ -139,12 +151,13 @@ function cancelOrEndEdit(e) {
 function deleteTask(e) {
     const clickedOption = e.target;
     if (!clickedOption.matches(".fa-trash")) return;
-    const isDeletionConfirmed = confirm("Do you really wish to delete the following task (This action is permanent once you submit the list)");
-    if (!isDeletionConfirmed) return;
+    /*const isDeletionConfirmed = confirm("Do you really wish to delete the following task (This action is permanent once you submit the list)");
+    if (!isDeletionConfirmed) return;*/
     const deletedTask = clickedOption.closest("li");
     const deletedTaskIndex = Number(deletedTask.querySelector("input").id);
     tasks.splice(deletedTaskIndex, 1);
     rerenderList();
+    sendMessage("The task has been deleted.", "blue");
 }
 
 function displayList() {
@@ -162,7 +175,16 @@ function sendMessage(messageText, color) {
     warningMessage.innerText = "";
     warningMessage.innerText = messageText;
     warningMessage.style.color = color;
-    timer = setTimeout(()=> warningMessage.innerText = "", 3500);
+    timer = setTimeout(()=> warningMessage.innerText = "", 2500);
+}
+
+function seekConfirmation(confirmationText) {
+    const isConfirmed = confirm(confirmationText);
+    return isConfirmed;
+}
+
+function checkTaskExistence(taskTextValue) {
+    return tasks.some((currentTask)=> currentTask.text === taskTextValue);
 }
 
 
