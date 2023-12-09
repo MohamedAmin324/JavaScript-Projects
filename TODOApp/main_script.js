@@ -185,23 +185,23 @@ function checkTaskExistence(taskTextValue) {
     return tasks.some((currentTask)=> currentTask.text === taskTextValue);
 }
 
-function displayCheckedStyles(e) {
+function setStatusStyles(e) {
     const clickedCheckBox = e.target;
     if (!clickedCheckBox.matches("input[type='checkbox']")) return;
 
     const labelElement = clickedCheckBox.closest("label");
+    const indicatorFlag = clickedCheckBox.checked;
 
-    if(clickedCheckBox.checked) {
-        labelElement.style.color = "gray";
-        labelElement.style.textDecoration = "line-through";
-        clickedCheckBox.closest("li").querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.add("hide"));
-    }
+    if(indicatorFlag) setStyles(labelElement, "gray", "line-through", clickedCheckBox.checked);
 
-    if(!clickedCheckBox.checked) {
-        labelElement.style.color = "black";
-        labelElement.style["text-decoration"]= "none";
-        clickedCheckBox.closest("li").querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.remove("hide"));
-    }
+    if(!indicatorFlag) setStyles(labelElement, "black", "none");
+}
+
+function setStyles(labelWrapper, color, textStyle) {
+    labelWrapper.style.color = color;
+    labelWrapper.style.textDecoration = textStyle;
+    console.log(labelWrapper.querySelector("input"));
+    labelWrapper.parentElement.querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.toggle("hide"));
 }
 
 
@@ -214,7 +214,7 @@ resetBtn.addEventListener("click", resetData);
 taskList.addEventListener("click", setTaskStatus);
 taskList.addEventListener("click", editTask);
 taskList.addEventListener("click", deleteTask);
-taskList.addEventListener("click", displayCheckedStyles);
+taskList.addEventListener("click", setStatusStyles);
 
 window.addEventListener("load", () => {
     if (tasks.length) displayList();
