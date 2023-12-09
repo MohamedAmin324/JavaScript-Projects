@@ -43,8 +43,8 @@ function populateList(userTask) {
 
     taskList.innerHTML = taskList.innerHTML + `
     <li class="task">
-    <label for="${ index }">
-    <input type="checkbox" id="${ index }" ${ userTask.done ? "checked" : "unchecked" }>
+    <label for="${ index }" class="${ userTask.text }">
+    <input type="checkbox" id="${ index }"  ${ userTask.done ? "checked" : "unchecked" }>
     ${ userTask.text }
     </label>
     <div class="options-container">
@@ -109,7 +109,6 @@ function editTask(e) {
         if (e.code !== "Enter") return;
         const currentTaskIndex = Number(labelElement.htmlFor);
         tasks[currentTaskIndex].text = inputField.value;
-        console.log(labelElement.childNodes);
         labelElement.removeChild(labelElement.childNodes[2]);
         labelElement.append(inputField.value);
         inputField.value = "";
@@ -136,8 +135,9 @@ function toggleBasicFunctionality(indicator, parentTask) {
     optionsBtn.forEach(btn => indicator ? btn.setAttribute("disabled", indicator) : btn.removeAttribute("disabled"));
     tasks.forEach((task) => {
         if (task === parentTask) return;
+        const checkBox = task.querySelector("input");
         const options = task.querySelectorAll("a:not(.cancel-edit-option)");
-        options.forEach(link => link.classList.toggle("hide"));
+        options.forEach(link => ((!checkBox.checked) && (link.classList.toggle("hide"))));
     })
 }
 
@@ -154,15 +154,19 @@ function deleteTask(e) {
     const deletedTask = clickedOption.closest("li");
     const deletedTaskIndex = Number(deletedTask.querySelector("input").id);
     tasks.splice(deletedTaskIndex, 1);
-    rerenderList();
+    reRenderList();
     sendMessage("The task has been deleted.", "blue");
 }
 
 function displayList() {
-    tasks.forEach(currentTask => populateList(currentTask));
+    tasks.forEach(currentTask => {
+        populateList(currentTask);
+        const currentLabel = document.querySelector(`label.${currentTask.text}`);
+        currentTask.done? setStyles(currentLabel, "gray", "line-through", currentTask.done): setStyles(currentLabel, "black", "none", currentTask.done);
+    });
 }
 
-function rerenderList() {
+function reRenderList() {
     if (!tasks.length) revealDisclaimer();
     removeListElements();
     displayList();
@@ -192,16 +196,16 @@ function setStatusStyles(e) {
     const labelElement = clickedCheckBox.closest("label");
     const indicatorFlag = clickedCheckBox.checked;
 
-    if(indicatorFlag) setStyles(labelElement, "gray", "line-through", clickedCheckBox.checked);
+    if(indicatorFlag) setStyles(labelElement, "gray", "line-through", indicatorFlag);
 
-    if(!indicatorFlag) setStyles(labelElement, "black", "none");
+    if(!indicatorFlag) setStyles(labelElement, "black", "none", indicatorFlag);
 }
 
-function setStyles(labelWrapper, color, textStyle) {
+function setStyles(labelWrapper, color, textStyle, forceValue) {
     labelWrapper.style.color = color;
     labelWrapper.style.textDecoration = textStyle;
-    console.log(labelWrapper.querySelector("input"));
-    labelWrapper.parentElement.querySelectorAll("a:not(.cancel-edit-option)").forEach((link) => link.classList.toggle("hide"));
+    labelWrapper.parentElement.querySelectorAll("a:not(.cancel-edit-option)").forEach((link) =>
+    forceValue? link.classList.add("hide"): link.classList.remove("hide"));
 }
 
 
