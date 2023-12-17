@@ -1,7 +1,52 @@
+/*--------- CSS Resets --------*/
 *, ::after, ::before {
     box-sizing: border-box;
 }
 
 body {
+    display: grid;
     margin: 0;
+    min-height: 100vh;
+    place-content: center;
+}
+
+.calculator {
+    border-radius: 9.5px;
+    border: solid 3px black;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.75rem;
+    padding: 20px;
+    width: 350px;
+}
+
+.calculator__display > * {
+    text-align: right;
+}
+
+.calculator__current-operation {
+    height: 41px;
+    margin-bottom: 0;
+}
+
+.calculator__result {
+    margin-top: 0;
+}
+
+.calculator__btn-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.calculator__btn-section > * {
+    padding: 7px 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.clear-btn {
+    grid-column: span 2;
+}
+
+.delete-btn {
+    grid-column: 3 / 5;
 }
