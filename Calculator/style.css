@@ -53,7 +53,7 @@ body, p {
     text-align: right;
 }
 
-.calculator__current-operation {
+.calculator__result {
     height: 41px;
 }
 
