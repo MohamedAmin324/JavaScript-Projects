@@ -5,6 +5,7 @@ const currentOperationDisplay = document.querySelector(".calculator__current-ope
 const resultDisplay = document.querySelector(".calculator__result");
 const clearBtn = document.querySelector(".clear-btn");
 const deleteBtn = document.querySelector(".delete-btn");
+const MATH_OPERATIONS = ["x", "+", "/", "-"];
 
 function populateDisplay(e) {
     const clickedBtn = e.target;
@@ -14,8 +15,11 @@ function populateDisplay(e) {
     if(currentOperationDisplay.innerText.includes(".") && clickedBtn.innerText === ".") return;
 
     if(["x", "+", "/", "-"].includes(clickedBtn.innerText)) {
+        if(!detectMathOperations()) {
         resultDisplay.innerText = `${currentOperationDisplay.innerText} ${clickedBtn.innerText}`;
         currentOperationDisplay.innerText = "0";
+        return;
+        }
         return;
     }
 
@@ -37,6 +41,10 @@ function deleteLastDigit() {
         return;
     }
     currentOperationDisplay.innerText = currentOperationDisplay.innerText.replace(/\d$/, " ");
+}
+
+function detectMathOperations() {
+    return MATH_OPERATIONS.some((sign)=> resultDisplay.innerText.includes(sign));
 }
 
 calculatorBtnSection.addEventListener("click", populateDisplay);
