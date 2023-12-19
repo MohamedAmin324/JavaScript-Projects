@@ -20,6 +20,10 @@ function populateDisplay(e) {
         currentOperationDisplay.innerText = "0";
         return;
         }
+        const firstPartItems = resultDisplay.innerText.split(" ");
+        const result = performMathEquation(Number(firstPartItems[0]), firstPartItems[1], Number(currentOperationDisplay.innerText));
+        resultDisplay.innerText = `${result} ${clickedBtn.innerText}`;
+        currentOperationDisplay.innerText = "0";
         return;
     }
 
@@ -45,6 +49,26 @@ function deleteLastDigit() {
 
 function detectMathOperations() {
     return MATH_OPERATIONS.some((sign)=> resultDisplay.innerText.includes(sign));
+}
+
+function performMathEquation(operandOne, operator, operandTwo) {
+    switch(operator) {
+        case "+": {
+            return operandOne + operandTwo;
+        }
+
+        case "-": {
+            return operandOne - operandTwo;
+        }
+
+        case "x": {
+            return operandOne * operandTwo;
+        }
+
+        case "/": {
+            return operandOne / operandTwo;
+        }
+    }
 }
 
 calculatorBtnSection.addEventListener("click", populateDisplay);
