@@ -8,8 +8,9 @@ const deleteBtn = document.querySelector(".delete-btn");
 const equalBtn = document.querySelector(".equal-btn");
 const MATH_OPERATIONS = ["x", "+", "/", "-"];
 
+
+
 function populateDisplay(e, pressedKey) {
-    //const clickedBtn = e.target || document.querySelector(`[data-key=${pressedKey}]`);
     let clickedBtn;
     e ? clickedBtn = e.target: clickedBtn = document.querySelector(`[data-key="${pressedKey}"]`);
     const userInput = clickedBtn.innerText;
@@ -24,6 +25,10 @@ function populateDisplay(e, pressedKey) {
         resultDisplay.innerText = `${currentOperationDisplay.innerText} ${userInput}`;
         currentOperationDisplay.innerText = "0";
         return;
+        }
+        if((resultDisplay.innerText.at(-1) === "/") && (currentOperationDisplay.innerText === "0")) {
+            alert("You cannot divide by 0!!!!!");
+            return;
         }
         const result = performMathEquation();
         resultDisplay.innerText = `${result} ${userInput}`;
@@ -60,36 +65,34 @@ function performMathEquation() {
     const [operandOne, operator] = firstPartItems;
     const operandTwo = Number(currentOperationDisplay.innerText);
     switch(operator) {
-        case "+": {
-            return Number(operandOne) + operandTwo;
-        }
-
-        case "-": {
-            return Number(operandOne) - operandTwo;
-        }
-
-        case "x": {
-            return Number(operandOne) * operandTwo;
-        }
-
-        case "/": {
-            return Number(operandOne) / operandTwo;
-        }
+        case "+": return Number(operandOne) + operandTwo;
+        case "-": return Number(operandOne) - operandTwo;
+        case "x": return Number(operandOne) * operandTwo;
+        case "/": return Number(operandOne) / operandTwo;
     }
 }
 
 function displayEquality() {
     if(!detectMathOperations()) return;
+    if((resultDisplay.innerText.at(-1) === "/") && (currentOperationDisplay.innerText === "0")) {
+        alert("You cannot divide by 0!!!!!");
+        return;
+    }
+
     const operationResult = performMathEquation();
     resultDisplay.innerText = `${resultDisplay.innerText} ${currentOperationDisplay.innerText} =`;
     currentOperationDisplay.innerText = operationResult;
 }
+
+
 
 calculatorBtnSection.addEventListener("click", populateDisplay);
 clearBtn.addEventListener("click", clearDisplay);
 deleteBtn.addEventListener("click", deleteLastDigit);
 equalBtn.addEventListener("click", displayEquality);
 document.addEventListener("keydown", (e)=>{
+    // cancel the quick find search bar displayed by the browser
+    if(e.key === "/") e.preventDefault();
     if(e.key === "=") {
         displayEquality();
         return;
