@@ -8,8 +8,10 @@ const deleteBtn = document.querySelector(".delete-btn");
 const equalBtn = document.querySelector(".equal-btn");
 const MATH_OPERATIONS = ["x", "+", "/", "-"];
 
-function populateDisplay(e) {
-    const clickedBtn = e.target;
+function populateDisplay(e, pressedKey) {
+    //const clickedBtn = e.target || document.querySelector(`[data-key=${pressedKey}]`);
+    let clickedBtn;
+    e ? clickedBtn = e.target: clickedBtn = document.querySelector(`[data-key="${pressedKey}"]`);
     const userInput = clickedBtn.innerText;
 
     if(clickedBtn.classList.contains("operation-key")) return;
@@ -87,3 +89,18 @@ calculatorBtnSection.addEventListener("click", populateDisplay);
 clearBtn.addEventListener("click", clearDisplay);
 deleteBtn.addEventListener("click", deleteLastDigit);
 equalBtn.addEventListener("click", displayEquality);
+document.addEventListener("keydown", (e)=>{
+    if(e.key === "=") {
+        displayEquality();
+        return;
+    }
+    if(e.key === "Backspace") {
+        deleteLastDigit();
+        return;
+    }
+    if(e.key === "Escape") {
+        clearDisplay();
+        return;
+    }
+    populateDisplay(null, e.key);
+})
