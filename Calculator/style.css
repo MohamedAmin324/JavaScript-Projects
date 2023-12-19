@@ -41,7 +41,7 @@ body, p {
     font-family: 'Oswald', sans-serif;
     font-size: 1.75rem;
     padding: 20px;
-    width: 350px;
+    min-width: 350px;
 }
 
 .calculator__display {
@@ -54,7 +54,7 @@ body, p {
 }
 
 .calculator__result {
-    height: 41px;
+    min-height: 41px;
 }
 
 .calculator__btn-section {
