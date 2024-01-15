@@ -1,0 +1,97 @@
+:root {
+    --body-clr: #5f5e5e23;
+    --btn-hover-clr: rgb(214, 204, 204);
+    --clicked-btn-color: #333;
+}
+
+/*-----------------Utility Classes------------------*/
+
+.display-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-color-white {
+    background-color: white;
+}
+
+.clicked-button {
+    background-color: var(--clicked-btn-color);
+    color: white;
+}
+
+/*--------------Resets------------------------------ */
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--body-clr);
+}
+
+input, button, label, span {
+    display: block;
+}
+
+input {
+    border: none;
+    padding: 0;
+}
+
+/*------------Header----------------*/
+
+h1 {
+    font-size: 4.35rem;
+    text-decoration: underline;
+    font-family: 'Lobster', sans-serif;
+}
+
+/*---------------Main Section----------*/
+
+main {
+    margin-inline-start: 200px;
+}
+
+form {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 25px;
+}
+
+.color-input {
+    width: 90px;
+    height: 90px;
+}
+
+button {
+    border: solid 2.25px gray;
+    width: 100%;
+    padding: 15px 10px;
+    font-size: large;
+    font-size: 0.9rem;
+    border-radius: 4px;
+}
+
+button:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+span {
+    font-weight: bold;
+}
+
+.sketch-display-container {
+    width: 500px;
+    height: 500px;
+}

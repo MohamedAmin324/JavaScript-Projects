@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-sketch</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <h1 class="text-center">Etch-a-sketch</h1>
+</header>
+
+<main class="display-flex">
+    <form class="display-flex form">
+        <input type="color" name="input-color" class="color-input">
+        <button class="color-mode-btn bg-color-white">Color mode</button>
+        <button class="rainbow-mode-btn bg-color-white">Rainbow mode</button>
+        <button class="eraser-btn bg-color-white">Eraser</button>
+        <button class="clear-btn bg-color-white">Clear</button>
+        <label for="range-input">
+            <span class="grid-value text-center">16x16</span>
+        <input type="range" name="input-range" min="1" max="64"  id="range-input" class="range-input">
+        </label>
+    </form>
+
+    <div class="sketch-display-container bg-color-white display-flex flex-wrap"></div>
+</main>
+</body>
+</html>
