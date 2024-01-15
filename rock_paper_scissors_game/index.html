@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <style>
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+
+        .game-interface {
+            width: fit-content;
+            min-width: 200px;
+            margin: auto;
+        }
+
+        .options-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 3px;
+        }
+
+        .option {
+            border: black 1px solid;
+            padding: 4px;
+            flex: 1 1 100%;
+        }
+
+        .option:active {
+            background-color: gray;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div class="game-interface">
+    <p class="instruction">Please Choose 1 Option:</p>
+
+    <div class="options-section">
+    <div class="option" data-option="Rock">Rock</div>
+    <div class="option" data-option="Paper">Paper</div>
+    <div class="option" data-option="Scissor">Scissor</div>
+    </div>
+
+    <p class="computer-choice">Computer Choice: <span class="text"></span></p>
+    <p class="result">Result: <span class="text"></span></p>
+
+    <div class="score-panel">
+        <p class="user-score" data-winner="user">Your Score: <span class="score-value">0</span></p>
+        <p class="computer-score" data-winner="computer">Computer Score: <span class="score-value">0</span></p>
+        <button>Reset Score</button>
+    </div>
+</div>
+</body>
+</html>
