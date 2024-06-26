@@ -1,0 +1,49 @@
+:root {
+    --clr-one: rgb(55, 58, 64);
+    --clr-two: rgb(238, 238, 238);
+
+
+    --fs-title: 1.55rem;
+
+
+    --link-padding-y: 3px;
+    --link-padding-x: 4.5px;
+    --link-border-radius: 7px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font: inherit;
+}
+
+body,
+h1 {
+    margin: 0;
+    margin-block: 0;
+}
+
+header {
+    background-color: var(--clr-one);
+    padding: 1.5rem 3.75rem 2rem 3.75rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: var(--fs-title);
+    color: var(--clr-two);
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.cart-link {
+    background-color: var(--clr-two);
+    padding: var(--link-padding-y) var(--link-padding-x);
+    border-radius: var(--link-border-radius);
+}
