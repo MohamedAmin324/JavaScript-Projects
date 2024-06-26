@@ -9,22 +9,24 @@ async function getItems() {
 
 
 const generateProductHtmlCode = ({ id, desc, name, img, price }) =>
-    ` <div class="product" id=${ id }>
-        <img src=${ img } alt="product image">
+    ` <div class="card" id=${ id }>
+        <img src=${ img } class="card-image" alt="product image">
 
-        <h2>${ name }</h2>
+        <div class="card-body">
+        <h2 class="product-name">${ name }</h2>
 
-        <p>${ desc }</p>
+        <p class="product-description">${ desc }</p>
 
-        <div class="wrapper">
-            <span class="product-price">${ price }</span>
+        <div class="wrapper display-flex">
+            <span class="product-price">$  ${ price }</span>
 
             <div class="order-commands">
-            <button class="increment-number">-</button>
+            <button class="decrement-number">-</button>
             <span class="number">0</span>
-            <button class="decrement-number">+</button>
+            <button class="increment-number">+</button>
             </div>
 
+        </div>
         </div>
     </div> `
 
