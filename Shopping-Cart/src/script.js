@@ -1,4 +1,8 @@
-"use strict"
+"use strict";
+
+import { selectedProducts, updateSelectedProducts } from "./cart.js";
+
+const mainElement = document.querySelector("main");
 
 async function getItems() {
     const data = await fetch("./src/data.json");
@@ -6,7 +10,6 @@ async function getItems() {
 
     return items;
 }
-
 
 const generateProductHtmlCode = ({ id, desc, name, img, price }) =>
     ` <div class="card" id=${ id }>
@@ -21,18 +24,33 @@ const generateProductHtmlCode = ({ id, desc, name, img, price }) =>
             <span class="product-price">$  ${ price }</span>
 
             <div class="order-commands">
-            <button class="decrement-number">-</button>
+            <button data-name=${ name } class="decrement-number">-</button>
             <span class="number">0</span>
-            <button class="increment-number">+</button>
+            <button data-name=${ name } class="increment-number">+</button>
             </div>
 
         </div>
         </div>
     </div> `
 
-const mainElement = document.querySelector("main");
-
 getItems().then((items) => {
     const codeString = items.reduce((str, item) => str + generateProductHtmlCode(item), "");
     mainElement.innerHTML = codeString;
+    const controlButtons = document.querySelectorAll("button");
+
+    controlButtons.forEach((btn) => {
+        btn.addEventListener("click", ({ target }) => {
+            if (target.classList.contains("decrement-number")) {
+                if (!selectedProducts.hasOwnProperty(target.dataset.name)) return;
+                updateSelectedProducts(target.dataset.name, "decrement");
+                const numberPanel = target.nextElementSibling;
+                numberPanel.innerText = `${ selectedProducts.hasOwnProperty(target.dataset.name) ? selectedProducts[target.dataset.name] : 0 }`
+                return;
+            }
+
+            updateSelectedProducts(target.dataset.name, "increment");
+            const numberPanel = target.previousElementSibling;
+            numberPanel.innerText = `${ selectedProducts[target.dataset.name] }`
+        })
+    })
 });
