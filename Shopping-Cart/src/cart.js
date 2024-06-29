@@ -13,4 +13,10 @@ function updateSelectedProducts(productName, operationCode) {
     selectedProducts.hasOwnProperty(productName) && selectedProducts[productName] > 1 ? selectedProducts[productName]-- : delete selectedProducts[productName];
 }
 
-export { selectedProducts, updateSelectedProducts };
+const getTotalNumberOfProducts = () => {
+    const productsNumbers = Object.values(selectedProducts);
+    if (productsNumbers.length === 0) return 0;
+    return productsNumbers.reduce((total, number) => total + number, 0);
+}
+
+export { selectedProducts, updateSelectedProducts, getTotalNumberOfProducts };

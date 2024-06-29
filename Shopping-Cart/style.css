@@ -3,9 +3,7 @@
     --clr-two: rgb(238, 238, 238);
     --clr-three: rgb(220, 95, 0);
 
-
     --fs-title: 1.55rem;
-
 
     --link-padding-y: 3px;
     --link-padding-x: 4.5px;
@@ -28,13 +26,13 @@ body,
 h1,
 h2,
 p {
-    margin: 0;
     margin-block: 0;
+    margin: 0;
 }
 
 img {
-    max-width: 100%;
     display: block;
+    max-width: 100%;
 }
 
 button {
@@ -51,8 +49,8 @@ button:hover {
 
 .display-flex {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 /* For accessibility reasons, it means screen readers only */
@@ -63,38 +61,50 @@ button:hover {
 header {
     background-color: var(--clr-one);
     padding: 1.5rem 3.75rem 2rem 3.75rem;
+    position: sticky;
+    top: 0;
 }
 
 h1 {
-    font-size: var(--fs-title);
     color: var(--clr-two);
     font-family: "Nunito Sans", sans-serif;
     font-optical-sizing: auto;
+    font-size: var(--fs-title);
     font-style: normal;
 }
 
 .cart-link {
     background-color: var(--clr-two);
-    padding: var(--link-padding-y) var(--link-padding-x);
     border-radius: var(--link-border-radius);
+    padding: var(--link-padding-y) var(--link-padding-x);
+    position: relative;
+}
+
+.total-products {
+    background-color: red;
+    border-radius: 3px;
+    color: white;
+    font-size: 1.15rem;
+    padding: 1px 3px;
+    position: absolute;
+    right: -8px;
+    top: -12px;
 }
 
 main {
-    margin-top: 1.75rem;
-    width: 80%;
-    margin-inline: auto;
+    column-gap: var(--column-gap);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
-
-    row-gap: var(--row-gap);
-    column-gap: var(--column-gap);
     justify-items: center;
+    margin: 1.75rem auto;
+    row-gap: var(--row-gap);
+    width: 80%;
 }
 
 .card {
+    border-radius: var(--card-border-radius);
     border: solid 2px var(--clr-three);
     max-width: var(--card-width);
-    border-radius: var(--card-border-radius);
 }
 
 .card-body {

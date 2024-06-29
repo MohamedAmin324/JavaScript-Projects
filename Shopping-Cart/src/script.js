@@ -1,8 +1,9 @@
 "use strict";
 
-import { selectedProducts, updateSelectedProducts } from "./cart.js";
+import { getTotalNumberOfProducts, selectedProducts, updateSelectedProducts } from "./cart.js";
 
 const mainElement = document.querySelector("main");
+const totalProductsIndex = document.querySelector(".total-products");
 
 async function getItems() {
     const data = await fetch("./src/data.json");
@@ -42,15 +43,20 @@ getItems().then((items) => {
         btn.addEventListener("click", ({ target }) => {
             if (target.classList.contains("decrement-number")) {
                 if (!selectedProducts.hasOwnProperty(target.dataset.name)) return;
+                
                 updateSelectedProducts(target.dataset.name, "decrement");
                 const numberPanel = target.nextElementSibling;
                 numberPanel.innerText = `${ selectedProducts.hasOwnProperty(target.dataset.name) ? selectedProducts[target.dataset.name] : 0 }`
+                totalProductsIndex.innerText = getTotalNumberOfProducts();
                 return;
             }
 
             updateSelectedProducts(target.dataset.name, "increment");
             const numberPanel = target.previousElementSibling;
             numberPanel.innerText = `${ selectedProducts[target.dataset.name] }`
+            totalProductsIndex.innerText = getTotalNumberOfProducts();
         })
     })
 });
+
+window.onload = () => totalProductsIndex.innerText = getTotalNumberOfProducts();
