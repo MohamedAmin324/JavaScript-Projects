@@ -1,0 +1,18 @@
+.empty-alert {
+    font-size: var(--fs-title);
+    font-weight: bolder;
+    text-align: center;
+}
+
+.home-btn {
+    background-color: var(--clr-one);
+    border-radius: 3.5px;
+    color: var(--clr-two);
+    margin: 10px auto;
+    padding: 4px 8px;
+    width: fit-content;
+}
+
+.home-btn:hover {
+    cursor: pointer;
+}
