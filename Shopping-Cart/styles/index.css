@@ -1,0 +1,51 @@
+main {
+    column-gap: var(--column-gap);
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
+    justify-items: center;
+    row-gap: var(--row-gap);
+    width: 80%;
+}
+
+.card {
+    border-radius: var(--card-border-radius);
+    border: solid 2px var(--clr-three);
+    max-width: var(--card-width);
+}
+
+.card-body {
+    padding: 0.6rem;
+    --fs-name: 1.25rem;
+    --fs-price: 1.75rem;
+    --fs-description: 1.075rem;
+    --fs-order-section: 1.35rem;
+
+    --padding-x-description: 0.85rem;
+}
+
+.product-name {
+    font-size: var(--fs-name);
+    font-weight: bolder;
+}
+
+.product-description {
+    font-size: var(--fs-description);
+    margin-block: var(--padding-x-description);
+}
+
+.product-price {
+    font-size: var(--fs-price);
+    font-weight: bolder;
+}
+
+.order-commands {
+    align-self: center;
+    font-size: var(--fs-order-section);
+}
+
+.increment-number {
+    color: green;
+}
+
+.decrement-number {
+    color: red;
+}
