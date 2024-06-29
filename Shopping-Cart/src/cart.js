@@ -1,4 +1,4 @@
-const selectedProducts = {};
+const selectedProducts = localStorage.getItem("products list") ? JSON.parse(localStorage.getItem("products list")) : {};
 
 function updateSelectedProducts(productName, operationCode) {
     if (!["increment", "decrement"].includes(operationCode)) {

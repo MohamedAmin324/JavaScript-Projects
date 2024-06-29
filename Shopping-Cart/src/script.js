@@ -43,11 +43,12 @@ getItems().then((items) => {
         btn.addEventListener("click", ({ target }) => {
             if (target.classList.contains("decrement-number")) {
                 if (!selectedProducts.hasOwnProperty(target.dataset.name)) return;
-                
+
                 updateSelectedProducts(target.dataset.name, "decrement");
                 const numberPanel = target.nextElementSibling;
                 numberPanel.innerText = `${ selectedProducts.hasOwnProperty(target.dataset.name) ? selectedProducts[target.dataset.name] : 0 }`
                 totalProductsIndex.innerText = getTotalNumberOfProducts();
+                localStorage.setItem("products list", JSON.stringify(selectedProducts));
                 return;
             }
 
@@ -55,6 +56,7 @@ getItems().then((items) => {
             const numberPanel = target.previousElementSibling;
             numberPanel.innerText = `${ selectedProducts[target.dataset.name] }`
             totalProductsIndex.innerText = getTotalNumberOfProducts();
+            localStorage.setItem("products list", JSON.stringify(selectedProducts));
         })
     })
 });
