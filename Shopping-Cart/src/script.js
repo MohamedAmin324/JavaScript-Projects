@@ -13,7 +13,8 @@ function updateNumberPanel(element, productName) {
 }
 
 getItems().then((items) => {
-    const codeString = items.reduce((str, item) => str + generateCard(item), "");
+    const codeString = items.reduce((str, item) => str + generateCard(item, selectedProducts[item.name]), "");
+
     mainElement.innerHTML = codeString;
     const controlButtons = document.querySelectorAll("button");
 
@@ -40,11 +41,11 @@ getItems().then((items) => {
     })
 });
 
-window.onload = () => {
+window.addEventListener("load", () => {
     totalProductsIndex.innerText = getTotalNumberOfProducts();
     const decrementButtons = document.querySelectorAll(".decrement-number");
     decrementButtons.forEach((btn) => {
         const productName = btn.closest(".card-body").querySelector(".product-name").innerText;
         updateNumberPanel(btn, productName);
     })
-}
+})

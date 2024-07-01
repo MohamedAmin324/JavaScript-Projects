@@ -38,7 +38,6 @@ function updateChosenProductsList(productName, fetchedItems, operationKey) {
         return;
     }
 
-    // if (fetchedItems.find((item) => item.name === productName) !== undefined) return;
     chosenProductsReferences.push(reference);
     localStorage.setItem("chosen products references", JSON.stringify(chosenProductsReferences));
 }
@@ -49,4 +48,7 @@ const getTotalNumberOfProducts = () => {
     return productsNumbers.reduce((total, number) => total + number, 0);
 }
 
-export { selectedProducts, updateSelectedProducts, getTotalNumberOfProducts, chosenProductsReferences, updateChosenProductsList };
+const getTotalBillValue = () => chosenProductsReferences.reduce((total, currentReference) => total + (selectedProducts[currentReference.name] * currentReference.price), 0);
+
+
+export { selectedProducts, updateSelectedProducts, getTotalNumberOfProducts, chosenProductsReferences, updateChosenProductsList, getTotalBillValue };

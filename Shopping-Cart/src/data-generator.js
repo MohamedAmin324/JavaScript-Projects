@@ -6,7 +6,7 @@ async function getItems() {
 }
 
 // generate code for a card of a product displayed in the main page
-const generateCard = ({ id, desc, name, img, price }) =>
+const generateCard = ({ id, desc, name, img, price }, number = 0) =>
     ` <div class="card" id=${ id }>
         <img src=${ img } class="card-image" alt="product image">
 
@@ -20,7 +20,7 @@ const generateCard = ({ id, desc, name, img, price }) =>
 
             <div class="order-commands">
             <button class="decrement-number">-</button>
-            <span class="number">0</span>
+            <span class="number">${ number === undefined ? 0 : number }</span>
             <button class="increment-number">+</button>
             </div>
 
@@ -33,19 +33,19 @@ const generateCard = ({ id, desc, name, img, price }) =>
 const generateLabel = ({ id, name, img, price }, number) => `
 <div class="label" id=${ id }>
             <figure>
-                <img src=${ img } />
+                <img class="label-img" src=${ img } />
             </figure>
             <div class="label-info">
-                <p class="label-name">${ name } <span class="label-price">${ price }</span>
-                <p>
+                <p class="label-name">${ name } <span class="label-price">$ ${ price }</span>
+                </p>
                 <div class="order-commands">
                     <button data-name=${ name } class="decrement-number">-</button>
                     <span class="number">${ number }</span>
                     <button data-name=${ name } class="increment-number">+</button>
-                    <p class="label-total-cost">${number * price}$</p>
+                    </div>
+                    <p class="label-total-cost">${ number * price }$</p>
                 </div>
                 <button class="cancel-btn">X</button>
-            </div>
         </div>
 `
 

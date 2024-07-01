@@ -1,3 +1,6 @@
+:root {
+    --label-width: 320px;
+}
 .empty-alert {
     font-size: var(--fs-title);
     font-weight: bolder;
@@ -15,4 +18,29 @@
 
 .home-btn:hover {
     cursor: pointer;
+}
+
+.label {
+    display: flex;
+    gap: 17px;
+    max-width: var(--label-width);
+    border: var(--clr-one) 2px solid;
+    border-radius: 7px;
+}
+
+.label-img {
+    width: 100px;
+    aspect-ratio: 1 / 1;
+}
+
+.label-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-block: 10px;
+}
+
+.cancel-btn {
+    margin-left: auto;
+    align-self: flex-start;
 }
