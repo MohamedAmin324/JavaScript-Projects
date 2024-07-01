@@ -104,3 +104,11 @@ main {
     margin: var(--main-margin-y) auto;
     width: 80%;
 }
+
+.increment-number {
+    color: green;
+}
+
+.decrement-number {
+    color: red;
+}

@@ -41,11 +41,3 @@ main {
     align-self: center;
     font-size: var(--fs-order-section);
 }
-
-.increment-number {
-    color: green;
-}
-
-.decrement-number {
-    color: red;
-}

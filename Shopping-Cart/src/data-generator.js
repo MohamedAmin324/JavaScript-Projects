@@ -39,11 +39,11 @@ const generateLabel = ({ id, name, img, price }, number) => `
                 <p class="label-name">${ name } <span class="label-price">$ ${ price }</span>
                 </p>
                 <div class="order-commands">
-                    <button data-name=${ name } class="decrement-number">-</button>
+                    <button class="decrement-number">-</button>
                     <span class="number">${ number }</span>
-                    <button data-name=${ name } class="increment-number">+</button>
+                    <button class="increment-number">+</button>
                     </div>
-                    <p class="label-total-cost">${ number * price }$</p>
+                    <p class="label-total-cost">$ ${ number * price }</p>
                 </div>
                 <button class="cancel-btn">X</button>
         </div>

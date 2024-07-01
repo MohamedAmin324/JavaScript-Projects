@@ -11,7 +11,7 @@ const main = document.querySelector("main");
 
 const generateUserOptionsCode = () => `
 <div class="container">
-<h2>Total Bill: $ ${ getTotalBillValue() }</h2>
+<h2 class="total-bills">Total Bill : $${ getTotalBillValue() }</h2>
 <div class="user-options">
 <button class="checkout-btn">Checkout</button>
 <button class="clear-btn">Clear Cart</button>

@@ -1,6 +1,3 @@
-:root {
-    --label-width: 320px;
-}
 .empty-alert {
     font-size: var(--fs-title);
     font-weight: bolder;
@@ -20,17 +17,59 @@
     cursor: pointer;
 }
 
+main {
+    place-content: center;
+    gap: 1rem;
+}
+
+.total-bills {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-size: var(--fs-title);
+    font-weight: bolder;
+}
+
+.user-options {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.checkout-btn,
+.clear-btn {
+    color: var(--clr-two);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.checkout-btn {
+    background-color: green;
+}
+
+.clear-btn {
+    background-color: red;
+}
+
 .label {
+    --min-label-width: 310px;
+    --label-img-width: 100px;
+    --fs-label-name: 1.15rem;
+
     display: flex;
     gap: 17px;
-    max-width: var(--label-width);
     border: var(--clr-one) 2px solid;
     border-radius: 7px;
 }
 
 .label-img {
-    width: 100px;
+    width: var(--label-img-width);
     aspect-ratio: 1 / 1;
+}
+
+.label-name,
+.label-total-cost {
+    font-size: var(--fs-label-name);
+    font-weight: bold;
 }
 
 .label-info {
@@ -42,5 +81,13 @@
 
 .cancel-btn {
     margin-left: auto;
+    margin-top: 10px;
+    color: red;
     align-self: flex-start;
+}
+
+@media (width > 768px) {
+    .label {
+        min-width: var(--min-label-width);
+    }
 }
