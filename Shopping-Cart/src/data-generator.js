@@ -36,7 +36,7 @@ const generateLabel = ({ id, name, img, price }, number) => `
                 <img class="label-img" src=${ img } />
             </figure>
             <div class="label-info">
-                <p class="label-name">${ name } <span class="label-price">$ ${ price }</span>
+                <p class="label-name"><span class="label-name-text">${ name }</span> <span class="label-price">$ ${ price }</span>
                 </p>
                 <div class="order-commands">
                     <button class="decrement-number">-</button>
