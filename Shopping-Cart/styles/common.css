@@ -2,8 +2,10 @@
     --clr-one: rgb(55, 58, 64);
     --clr-two: rgb(238, 238, 238);
     --clr-three: rgb(220, 95, 0);
+    --clr-four: rgb(30, 30, 236);
 
     --fs-title: 1.55rem;
+    --fs-footer: 1.2rem;
 
     --link-padding-y: 3px;
     --link-padding-x: 4.5px;
@@ -111,4 +113,14 @@ main {
 
 .decrement-number {
     color: red;
+}
+
+footer {
+    font-size: var(--fs-footer);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.attribution-link {
+    color: var(--clr-four);
 }
