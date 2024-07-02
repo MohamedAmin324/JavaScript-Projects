@@ -36,7 +36,8 @@ main {
 }
 
 .checkout-btn,
-.clear-btn {
+.clear-btn,
+.home-btn {
     color: var(--clr-two);
     padding: 4px;
     border-radius: 4px;
@@ -48,6 +49,11 @@ main {
 
 .clear-btn {
     background-color: red;
+}
+
+.user-options > .home-btn {
+    margin: 0;
+    background-color: gray;
 }
 
 .label {

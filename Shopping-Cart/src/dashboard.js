@@ -1,23 +1,12 @@
 import { getTotalNumberOfProducts, selectedProducts, chosenProductsReferences, getTotalBillValue } from "./cart.js";
-import { generateLabel } from "./data-generator.js";
+import { generateLabel, generateUserOptionsCode } from "./data-generator.js";
 
 const EMPTY_CART_HTML_CODE = `
         <p class="empty-alert">Cart is Empty</p>
         <a class="home-btn" href="./index.html" >Back to Home</a>`
 
-
 const totalProductsIndex = document.querySelector(".total-products");
 const main = document.querySelector("main");
-
-const generateUserOptionsCode = () =>
-        `<div class="container">
-<h2 class="total-bill">Total Bill : $<span class="total-bill-value">${ getTotalBillValue() }</span></h2>
-<div class="user-options">
-<button class="checkout-btn">Checkout</button>
-<button class="clear-btn">Clear Cart</button>
-</div>
-</div>
-`
 
 function clearCart() {
         chosenProductsReferences.length = 0;
@@ -38,14 +27,14 @@ function removeChosenProduct() {
         const productName = label.querySelector(".label-name-text").innerText;
         const totalBillValue = main.querySelector(".total-bill-value");
 
-        if(main.childElementCount === 2) {
+        if (main.childElementCount === 2) {
                 clearCart();
                 return;
         }
-        
+
         main.removeChild(label);
 
-        chosenProductsReferences.splice(chosenProductsReferences.findIndex((reference)=> reference.name === productName), 1);
+        chosenProductsReferences.splice(chosenProductsReferences.findIndex((reference) => reference.name === productName), 1);
         delete selectedProducts[productName];
 
         localStorage.setItem("chosen products references", JSON.stringify(chosenProductsReferences));
@@ -53,6 +42,36 @@ function removeChosenProduct() {
 
         totalProductsIndex.innerText = getTotalNumberOfProducts();
         totalBillValue.innerText = getTotalBillValue();
+}
+
+function updateProductStatus() {
+        const labelInfo = this.closest(".label-info");
+        const productName = labelInfo.querySelector(".label-name-text").innerText;
+        const productNumber = labelInfo.querySelector(".number");
+        const productTotalCost = labelInfo.querySelector(".label-total-cost");
+
+        if (this.classList.contains("increment-number")) {
+                selectedProducts[productName] += 1;
+                updateLabelInfo(productName, productNumber, productTotalCost);
+                return;
+        }
+
+        if (productNumber.innerText === "1") {
+                removeChosenProduct.call(this);
+                return;
+        }
+
+        selectedProducts[productName] -= 1;
+        updateLabelInfo(productName, productNumber, productTotalCost);
+}
+
+// update the elements inside the div with the class label-info
+function updateLabelInfo(productName, productNumber, productTotalCost) {
+        productNumber.innerText = selectedProducts[productName];
+        productTotalCost.innerText = `$ ${ selectedProducts[productName] * chosenProductsReferences.find((reference) => reference.name === productName).price }`;
+        totalProductsIndex.innerText = getTotalNumberOfProducts();
+        localStorage.setItem("products list", JSON.stringify(selectedProducts));
+        main.querySelector(".total-bill-value").innerText = getTotalBillValue();
 }
 
 window.addEventListener("load", () => {
@@ -66,11 +85,13 @@ window.addEventListener("load", () => {
         })
         main.innerHTML = codeString;
 
+        const checkoutBtn = document.querySelector(".checkout-btn");
         const clearBtn = document.querySelector(".clear-btn");
         const cancelBtns = document.querySelectorAll(".cancel-btn");
-        cancelBtns.forEach((btn) => btn.addEventListener("click", removeChosenProduct));
+        const controlButtons = document.querySelectorAll(".decrement-number, .increment-number");
 
-
+        checkoutBtn.addEventListener("click", ()=> alert("The backend part may be done in the near future using IDK php & MySql"));
         clearBtn.addEventListener('click', clearCart);
-
+        cancelBtns.forEach((btn) => btn.addEventListener("click", removeChosenProduct));
+        controlButtons.forEach((btn) => btn.addEventListener("click", updateProductStatus));
 })

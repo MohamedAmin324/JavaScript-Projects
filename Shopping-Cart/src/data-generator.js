@@ -1,3 +1,5 @@
+import { getTotalBillValue } from "./cart.js";
+
 async function getItems() {
     const data = await fetch("./src/data.json");
     const items = await data.json();
@@ -49,4 +51,15 @@ const generateLabel = ({ id, name, img, price }, number) => `
         </div>
 `
 
-export { getItems, generateCard, generateLabel }
+const generateUserOptionsCode = () =>
+    `<div class="container">
+<h2 class="total-bill">Total Bill : $ <span class="total-bill-value">${ getTotalBillValue() }</span></h2>
+<div class="user-options">
+<button class="checkout-btn">Checkout</button>
+<button class="clear-btn">Clear Cart</button>
+<a class="home-btn" href="./index.html" >Back to Home</a>
+</div>
+</div>
+`
+
+export { getItems, generateCard, generateLabel, generateUserOptionsCode }
